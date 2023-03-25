@@ -21,6 +21,7 @@
 		69702B6F29CF8742006FF591 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 69702B6E29CF8742006FF591 /* FirebaseAuth */; };
 		69702B7129CF8742006FF591 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 69702B7029CF8742006FF591 /* FirebaseFirestore */; };
 		69702B7329CF8742006FF591 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 69702B7229CF8742006FF591 /* FirebaseStorage */; };
+		69702B7729CFA203006FF591 /* MainTabbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69702B7629CFA203006FF591 /* MainTabbarViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		693ACF2629CF1C7800EFDD63 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		69702B6129CF75BF006FF591 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		69702B6429CF7F9C006FF591 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		69702B7629CFA203006FF591 /* MainTabbarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				69702B6429CF7F9C006FF591 /* FirebaseManager.swift */,
+				69702B7629CFA203006FF591 /* MainTabbarViewModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				69702B6229CF75BF006FF591 /* SessionService.swift in Sources */,
 				693ACF2729CF1C7800EFDD63 /* HomeView.swift in Sources */,
 				69702B6529CF7F9C006FF591 /* FirebaseManager.swift in Sources */,
+				69702B7729CFA203006FF591 /* MainTabbarViewModel.swift in Sources */,
 				6909ABC829CE407B003135A7 /* ContentView.swift in Sources */,
 				6909ABC629CE407B003135A7 /* swiftUInewAppApp.swift in Sources */,
 			);

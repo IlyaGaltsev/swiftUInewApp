@@ -61,22 +61,22 @@ struct SignInView: View {
                     
                     HStack {
                         
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(maxWidth: 40, maxHeight: 40)
-                                Image(systemName: "square.and.pencil")
-                                    .foregroundColor(Color.black)
-                                    .padding()
-                            }
-                            
-                            TextField("Enter email", text: $email)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 16)
+                                .frame(maxWidth: 40, maxHeight: 40)
+                            Image(systemName: "square.and.pencil")
+                                .foregroundColor(Color.black)
+                                .padding()
+                        }
+                        
+                        TextField("Enter email", text: $email)
                         
                     }
-                  
+                    
                     
                     
                     SecureField("Enter password", text: $password)
-//                        .modifier(TextFiled())
+                    //                        .modifier(TextFiled())
                     
                     
                 }
@@ -109,7 +109,7 @@ struct SignInView: View {
                                 .frame(maxWidth: .infinity, maxHeight: 50)
                                 .background(.thickMaterial)
                                 .cornerRadius(14)
-                                
+                            
                         }
                     }
                 }
@@ -117,7 +117,7 @@ struct SignInView: View {
                     withAnimation() {
                         isSignUp.toggle()
                     }
-                   
+                    
                 } label: {
                     if (!isSignUp) {
                         Text("Don't have an account? Create account")
@@ -128,7 +128,7 @@ struct SignInView: View {
                             .font(.footnote)
                             .padding(.top, 8)
                     }
-                   
+                    
                 }
                 
             }
@@ -156,6 +156,7 @@ struct SignInView: View {
                 print(error!.localizedDescription)
             }
         }
+        print(FirebaseManager.shared.auth.currentUser !== nil)
     }
 }
 
@@ -174,11 +175,5 @@ struct TextFiled: ViewModifier {
             .frame(maxWidth: .infinity, maxHeight: 50)
             .background(Color.teal    )
             .border(Color.red)
-         
-//            .background(Color.clear)
-//            .stroke(.white.opacity(0.6), lineWidth: 2)
-        
-//            .clipShape(RoundedRectangle(cornerRadius: 10)  )
-      
     }
 }
