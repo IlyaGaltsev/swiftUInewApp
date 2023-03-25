@@ -2,14 +2,13 @@ import SwiftUI
 import Firebase
 
 struct HomeView: View {
+    var viewModel: MainTabbarViewModel
     var body: some View {
         VStack {
             Text("Hello, HOME!")
             Button{
-                let firebaseAuth = Auth.auth()
-                
                 do {
-                    try firebaseAuth.signOut()
+                    try FirebaseManager.shared.auth.signOut()
                 } catch let signOutError as NSError {
                     print("Error signing out", signOutError)
                 }
@@ -24,6 +23,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(viewModel: MainTabbarViewModel(user: FirebaseManager.shared.auth.currentUser!))
     }
 }
