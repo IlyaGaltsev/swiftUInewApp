@@ -33,56 +33,101 @@ struct SignInView: View {
     @State private var isSignUp = false
     
     
-    static let color0 = Color(red: 238/255, green: 130/255, blue: 238/255);
-    static let color1 = Color(red: 0/255, green: 209/255, blue: 255/255);
+    static let color0 = Color(red: 0.984, green: 0.286, blue: 0.773);
+    static let color1 = Color(red: 0.984, green: 0.553, blue: 0.671);
+    
+    
+    static let color2 = Color(red: 238/255, green: 130/255, blue: 238/255);
+    static let color3 = Color(red: 0/255, green: 209/255, blue: 255/255);
     
     let gradient = Gradient(colors: [color0, color1]);
     
     var body: some View{
-        ZStack {
-            GradientBackgoundView()
+        ZStack(alignment: .top) {
+            Rectangle()
+                .foregroundColor(Color(red: 0.184, green: 0.184, blue: 0.333))
                 .edgesIgnoringSafeArea(.all)
             
-            VStack{
-                Text("Sign In")
+            VStack (alignment: .center){
+                Text(!isSignUp ? "Sign In" : "Create account")
                     .font(.largeTitle)
                     .bold()
                     .frame(maxWidth : .infinity, alignment: .leading)
                     .padding(.top)
-                    .foregroundColor(Color.primary.opacity(0.4))
+                    .foregroundColor(Color.white.opacity(0.7))
                 
-                Text("Login an your account")
+                Text(!isSignUp ? "Login an your account" : "Create an your account")
                     .font(.callout)
                     .frame(maxWidth : .infinity, alignment: .leading)
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 12, trailing: 0))
                 
-                //                Divider().padding()
-                
-                VStack (spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14)
+                        .frame(maxWidth : .infinity, maxHeight: .leastNonzeroMagnitude)
                     
-                    HStack {
+                    VStack (alignment: .leading, spacing: 20) {
                         
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 16)
-                                .frame(maxWidth: 40, maxHeight: 40)
-                            Image(systemName: "square.and.pencil")
-                                .foregroundColor(Color.black)
-                                .padding()
+                        HStack() {
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .frame(maxWidth: 40, maxHeight: 40)
+                                    .foregroundColor(Color(red: 0.416, green: 0.22, blue: 0.337))
+                                Image(systemName: "at")
+                                    .foregroundColor(Color.white)
+                                    .padding()
+                            }
+                            
+                            TextField("Enter email", text: $email)
+                                .foregroundColor(Color.white)
+                            
                         }
                         
-                        TextField("Enter email", text: $email)
+                    }.background(.gray.opacity(0.2))
+                        .cornerRadius(14)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.white.opacity(0.4), lineWidth: 2)
+                        )
+                    
+                }.padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14)
+                        .frame(maxWidth : .infinity, maxHeight: .leastNonzeroMagnitude)
+                    
+                    VStack (alignment: .leading, spacing: 20) {
                         
-                    }
-                    
-                    
-                    
-                    SecureField("Enter password", text: $password)
-                    //                        .modifier(TextFiled())
-                    
+                        HStack() {
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .frame(maxWidth: 40, maxHeight: 40)
+                                    .foregroundColor(Color(red: 0.416, green: 0.22, blue: 0.337))
+                                Image(systemName: "lock.fill")
+                                    .foregroundColor(Color.white)
+                                    .padding()
+                            }
+                            
+                            SecureField("Enter password", text: $password)
+                                .foregroundColor(Color.white)
+                            
+                        }
+                        
+                    }.background(.gray.opacity(0.2))
+                        .cornerRadius(14)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.white.opacity(0.4), lineWidth: 2)
+                        )
                     
                 }
-                .padding()
+                
+                
+                
                 Text("By signing up you accept the **Terms of Service** and **Privacy Policy**")
                     .font(.footnote)
+                    .padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
                 
                 Button {
                     if (isSignUp) {
@@ -92,25 +137,20 @@ struct SignInView: View {
                     }
                 } label: {
                     ZStack {
-                        if (!isSignUp){
-                            Text("Sign in")
-                                .foregroundColor(Color.white)
-                                .padding()
-                                .frame(maxWidth: .infinity, maxHeight: 50)
-                                .background(Color.blue.opacity(0.4))
-                                .cornerRadius(16)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(.white.opacity(0.6), lineWidth: 2)
-                                )
-                        } else {
-                            Text("Create account")
-                                .bold()
-                                .frame(maxWidth: .infinity, maxHeight: 50)
-                                .background(.thickMaterial)
-                                .cornerRadius(14)
-                            
-                        }
+                        
+                        Text(!isSignUp ? "Sign In" : "Create account")
+                            .foregroundColor(Color.white)
+                            .padding()
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .background(LinearGradient(gradient: gradient, startPoint:.topLeading , endPoint: .bottomTrailing))
+                            .cornerRadius(16)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.white.opacity(0.6), lineWidth: 2)
+                            )
+                        
+                        
+                        
                     }
                 }
                 Button {
@@ -119,23 +159,17 @@ struct SignInView: View {
                     }
                     
                 } label: {
-                    if (!isSignUp) {
-                        Text("Don't have an account? Create account")
-                            .font(.footnote)
-                            .padding(.top, 8)
-                    }else {
-                        Text("Do have an account? Sign in")
-                            .font(.footnote)
-                            .padding(.top, 8)
-                    }
+                    
+                    Text(!isSignUp ? "Don't have an account? Create account": "Do have an account? Sign in")
+                        .font(.footnote)
+                        .padding(.top, 8)
                     
                 }
                 
             }
-            .padding()
-            .background(.gray.opacity(0.2))
-            .foregroundColor(Color.primary.opacity(0.35))
+            .foregroundColor(Color.white.opacity(0.6))
             .cornerRadius(35)
+            
             .padding()
         }
     }
