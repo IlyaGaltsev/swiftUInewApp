@@ -1,1 +1,3 @@
 # swiftUInewApp
+
+- [x] Подключить firebase
