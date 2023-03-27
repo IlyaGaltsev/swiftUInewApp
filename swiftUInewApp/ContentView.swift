@@ -28,6 +28,8 @@ struct GradientBackgoundView: View {
 
 
 struct SignInView: View {
+    @State private var isError = false
+    @State private var errorText = ""
     @State private var email = ""
     @State private var password = ""
     @State private var isSignUp = false
@@ -130,11 +132,14 @@ struct SignInView: View {
                     .padding(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
                 
                 Button {
-                    if (isSignUp) {
-                        register()
-                    }else {
+                    isError = false
+                    
+                    if (!isSignUp) {
                         login()
+                    }else {
+                        register()
                     }
+                    
                 } label: {
                     ZStack {
                         
@@ -165,11 +170,16 @@ struct SignInView: View {
                         .padding(.top, 8)
                     
                 }
+                if (isError == true) {
+                    Text(errorText)
+                        .foregroundColor(Color.red)
+                        .padding(EdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 0))
+                }
+           
                 
             }
             .foregroundColor(Color.white.opacity(0.6))
             .cornerRadius(35)
-            
             .padding()
         }
     }
@@ -179,6 +189,8 @@ struct SignInView: View {
             result, error in
             if error != nil {
                 print(error!.localizedDescription)
+                errorText = error!.localizedDescription
+                isError = true
             }
         }
     }
@@ -188,6 +200,8 @@ struct SignInView: View {
             result, error in
             if error != nil {
                 print(error!.localizedDescription)
+                errorText = error!.localizedDescription
+                isError = true
             }
         }
         print(FirebaseManager.shared.auth.currentUser !== nil)

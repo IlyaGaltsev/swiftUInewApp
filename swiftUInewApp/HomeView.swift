@@ -6,6 +6,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             Text("Hello, HOME!")
+            Text( FirebaseManager.shared.auth.currentUser!.email ?? "EMAIL")
             Button{
                 do {
                     try FirebaseManager.shared.auth.signOut()
