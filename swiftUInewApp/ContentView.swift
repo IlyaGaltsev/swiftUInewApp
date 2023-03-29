@@ -1,32 +1,6 @@
 import SwiftUI
 import Firebase
 
-import SwiftUI
-
-struct GradientBackgoundView: View {
-    @State var start = UnitPoint(x:0, y: -2)
-    @State var end = UnitPoint(x:4, y: 0)
-    static let color0 = Color(red: 238/255, green: 130/255, blue: 238/255);
-    static let color1 = Color(red: 0/255, green: 209/255, blue: 255/255);
-    static let color2 = Color(red: 238/255, green: 130/255, blue: 238/255);
-    static let color3 = Color(red: 0/255, green: 209/255, blue: 255/255);
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
-    let colors = [color0, color1, color2, color3]
-    
-    var body: some View {
-        LinearGradient(gradient: Gradient(colors: colors), startPoint:start , endPoint: end)
-            .animation(Animation.easeInOut(duration: 6)
-                .repeatForever()).onReceive(timer, perform: { _ in
-                    self.start = UnitPoint(x: 4, y: 0)
-                    self.end = UnitPoint(x: 0, y: 2)
-                    self.start = UnitPoint(x: -50, y: 20)
-                    self.start = UnitPoint(x: 4, y: 0)
-                })
-    }
-}
-
-
 struct SignInView: View {
     @State private var isError = false
     @State private var errorText = ""
@@ -175,7 +149,7 @@ struct SignInView: View {
                         .foregroundColor(Color.red)
                         .padding(EdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 0))
                 }
-           
+                
                 
             }
             .foregroundColor(Color.white.opacity(0.6))

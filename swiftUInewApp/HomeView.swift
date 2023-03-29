@@ -3,20 +3,16 @@ import Firebase
 
 struct HomeView: View {
     var viewModel: MainTabbarViewModel
+    
     var body: some View {
-        VStack {
-            Text("Hello, HOME!")
-            Text( FirebaseManager.shared.auth.currentUser!.email ?? "EMAIL")
-            Button{
-                do {
-                    try FirebaseManager.shared.auth.signOut()
-                } catch let signOutError as NSError {
-                    print("Error signing out", signOutError)
+        TabView {
+            
+            MainMessagesView()
+                .tabItem{
+                    Image(systemName: "house")
+                    Text("Home")
                 }
-                
-            } label: {
-                Text("Logout").foregroundColor(Color.red)
-            }
+            
         }
         
     }

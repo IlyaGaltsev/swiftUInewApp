@@ -23,7 +23,7 @@ struct YourApp: App {
                 } else {
                     SignInView()
                 }
-               
+                
             }
         }
     }
