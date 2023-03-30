@@ -1,7 +1,10 @@
 import SwiftUI
 import Firebase
 
-struct SignInView: View {
+struct AutorizationView: View {
+    
+    @EnvironmentObject var viewModel: AppViewModel
+    
     @State private var isError = false
     @State private var errorText = ""
     @State private var email = ""
@@ -109,9 +112,18 @@ struct SignInView: View {
                     isError = false
                     
                     if (!isSignUp) {
-                        login()
-                    }else {
-                        register()
+//                        login()
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        viewModel.signIn(email: email, password: password)
+                    } else {
+//                        register()
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        
+                        viewModel.signUp(email: email, password: password)
                     }
                     
                 } label: {
@@ -158,33 +170,33 @@ struct SignInView: View {
         }
     }
     
-    func login() {
-        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) {
-            result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-                errorText = error!.localizedDescription
-                isError = true
-            }
-        }
-    }
-    
-    func register() {
-        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
-            result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-                errorText = error!.localizedDescription
-                isError = true
-            }
-        }
-        print(FirebaseManager.shared.auth.currentUser !== nil)
-    }
+//    func login() {
+//        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) {
+//            result, error in
+//            if error != nil {
+//                print(error!.localizedDescription)
+//                errorText = error!.localizedDescription
+//                isError = true
+//            }
+//        }
+//    }
+//
+//    func register() {
+//        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) {
+//            result, error in
+//            if error != nil {
+//                print(error!.localizedDescription)
+//                errorText = error!.localizedDescription
+//                isError = true
+//            }
+//        }
+//        print(FirebaseManager.shared.auth.currentUser !== nil)
+//    }
 }
 
-struct SignInView_Previews: PreviewProvider {
+struct AutorizationView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        AutorizationView()
     }
 }
 

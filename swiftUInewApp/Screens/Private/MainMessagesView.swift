@@ -1,22 +1,54 @@
 import SwiftUI
+import AudioToolbox
+import Firebase
+import FirebaseFirestore
+
 
 struct MainMessagesView: View {
+    @EnvironmentObject var viewModel: AppViewModel
     @State var sholdShowLogOutOptions = false
+    
+    func getMessages() {
+        //        FirebaseFirestore.collection("messages").getDocuments {documentSnapshot, error in
+        //            if let error = error {
+        //                print("FATALITY,\(error)")
+        //            }
+        //
+        //            documentSnapshot?.documents.forEach({snapshot in
+        //                print(snapshot.data())
+        ////                        users.append(.init(data: snapshot.data()))
+        //            })
+        //        }
+        //        @FirestoreQuery(collectionPath: "messages") var todos
+        
+    }
     
     private var navBar: some View {
         HStack(spacing: 16) {
             
-            Image(systemName: "person.fill")
-                .font(.system(size: 34, weight: .heavy))
+            
+            
+            AsyncImage(
+                url: viewModel.auth.currentUser?.photoURL,
+                
+                content: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }, placeholder: {
+                    Color.gray
+                })
+            .frame(width: 48, height: 48)
+            .mask(RoundedRectangle(cornerRadius: 48).frame(width: 48, height: 48))
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("DisplayName")
+                Text(viewModel.auth.currentUser?.displayName ?? "This is you")
                     .font(.system(size: 24, weight: .bold))
                 
                 HStack {
                     Circle()
                         .foregroundColor(.green)
-                        .frame(width: 14, height: 14)
+                        .frame(width: 8, height: 8)
                     
                     Text("online")
                         .font(.system(size: 12))
@@ -25,6 +57,8 @@ struct MainMessagesView: View {
             }
             Spacer()
             Button {
+                getMessages()
+                AudioServicesPlaySystemSound(1519)
                 self.sholdShowLogOutOptions.toggle()
             } label: {
                 Image(systemName: "gear")
@@ -33,12 +67,7 @@ struct MainMessagesView: View {
                 .init(title: Text("Settings"),
                       message: Text("What do you want to do?"), buttons: [
                         .destructive(Text("Log Out"), action: {
-                            print("LOOOGOUT")
-                            do {
-                                try FirebaseManager.shared.auth.signOut()
-                            } catch let signOutError as NSError {
-                                print("Error signing out", signOutError)
-                            }
+                            viewModel.signOut()
                         }), .cancel()])
             }
             
@@ -106,5 +135,6 @@ struct MainMessagesView: View {
 struct MainMessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MainMessagesView()
+            .environment(\.colorScheme, .dark)
     }
 }
