@@ -2,7 +2,6 @@ import SwiftUI
 import Firebase
 
 struct HomeView: View {
-    var viewModel: MainTabbarViewModel
     
     var body: some View {
         TabView {
@@ -20,6 +19,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: MainTabbarViewModel(user: FirebaseManager.shared.auth.currentUser!))
+        HomeView()
+            .environment(\.colorScheme, .dark)
     }
 }
+
