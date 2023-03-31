@@ -80,7 +80,7 @@ struct MainMessagesView: View {
                 navBar
                 
                 
-                
+               
                 ScrollView {
                     ForEach(0..<20, id: \.self) { num in
                         VStack {
@@ -90,17 +90,17 @@ struct MainMessagesView: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 44)
                                             .stroke(Color.black, lineWidth: 1))
-                                
+
                                 VStack(alignment: .leading) {
                                     Text("UserName")
                                         .font(.system(size: 16, weight: .bold))
-                                    
+
                                     Text("Message sent to user")
                                         .font(.system(size: 14))
                                         .foregroundColor(Color(.lightGray))
                                 }
                                 Spacer()
-                                
+
                                 Text("22d")
                                     .font(.system(size: 14, weight: .semibold))
                             }
@@ -111,7 +111,7 @@ struct MainMessagesView: View {
                 
             }.overlay(
                 Button {
-                    
+
                 } label: {
                     HStack {
                         Spacer()

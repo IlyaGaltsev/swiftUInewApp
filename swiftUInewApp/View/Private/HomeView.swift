@@ -12,6 +12,11 @@ struct HomeView: View {
                     Text("Home")
                 }
             
+            ChatView()
+                .tabItem{
+                    Image(systemName: "message")
+                    Text("Chat")
+                }
         }
         
     }
