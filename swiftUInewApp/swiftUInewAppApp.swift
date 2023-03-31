@@ -19,7 +19,7 @@ struct YourApp: App {
     var body: some Scene {
         WindowGroup {
             let viewModel = AppViewModel()
-           
+            
             RouterView()
                 .environmentObject(viewModel)
         }
