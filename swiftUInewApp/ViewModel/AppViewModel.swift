@@ -15,17 +15,6 @@ class AppViewModel: ObservableObject {
         return auth.currentUser!
     }
     
-//    firestore.collection("messages").getDocuments {documentSnapshot, error in
-//        if let error = error {
-//            pront("FATALITY,\(error)")
-//        }
-//
-//        documentSnapshot?.documents.forEach({snapshot in
-//            print(snapshot.data())
-//            users.append(.init(data: snapshot.data()))
-//        }
-//    }
-    
     func signIn(email: String, password: String) {
         auth.signIn(withEmail: email,
                     password: password) { [weak self]  result, error in
