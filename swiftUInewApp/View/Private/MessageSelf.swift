@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct MessageSelf: View {
-    //    @EnvironmentObject var viewModel: AppViewModel
-    var message: Message
     
+    var message: Message
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -11,7 +10,7 @@ struct MessageSelf: View {
             HStack(alignment: .bottom) {
                 
                 AsyncImage(
-                    url: URL(string: "https://mobimg.b-cdn.net/v3/fetch/c9/c92dcab37e861605cf785b0632948e61.jpeg"),
+                    url: URL(string: message.photoUrl),
                     
                     content: { image in
                         image
@@ -46,6 +45,7 @@ struct MessageSelf: View {
 struct MessageSelf_Previews: PreviewProvider {
     static var previews: some View {
         MessageSelf(message: Message(
+            id: UUID(),
             uid: "ыоваол74356893ишоурв",
             text: "Str dsgfjhsd hjsdhf sdhdhsjfhdsjhfksd sduhfkjhsdb sdjhfisd cjkhdufhsnd kjsdhfj jksdhjkf j hsd jsdu jskdufhsdjn judsh jksdh sjkd bjbkjhs bhsd  ghsdjh oisdb hksd  oubsdk jnbsduo ing",
             displayName: "Ктото",

@@ -1,27 +1,35 @@
 import Foundation
+import FirebaseFirestore
 
 class MessagesViewModel: ObservableObject {
     
-    static let  shared = MessagesViewModel()
+    static let shared = MessagesViewModel()
     
-    var messages = [
-        Message(
-            uid: "String",
-            text: "tr dsgfjhsd hjsdhf sdhdhsjfhdsjhfksd sduhfkjhsdb sdjhfisd cjkhdufhsnd kjsdhfj jksdhjkf j hsd jsdu jskdufhsdjn judsh jksdh sjkd bjbkjhs bhsd  ghsdjh oisdb hksd",
-            displayName: "user93242",
-            photoUrl: "https://google.com"
-        ),
-        Message(
-            uid: "22",
-            text: "tr dsgfjhsd hjsdhf sdhdhsjfhdsjhfksd sduhfkjhsdb sdjhfisd cjkhdufhsnd kjsdhfj jksdhjkf j hsd jsdu jskdufhsdjn judsh jksdh sjkd bjbkjhs bhsd  ghsdjh oisdb hksd",
-            displayName: "user93458333",
-            photoUrl: "https://google.com"
-        ),
-        Message(
-            uid: "33",
-            text: "tr dsgfjhsd hjsdhf sdhdhsjfhdsjhfksd sduhfkjhsdb sdjh",
-            displayName: "user93458",
-            photoUrl: "https://google.com"
-        )
-    ]
+    @Published var messages = [Message]()
+    
+    init() {
+        let db = Firestore.firestore()
+        db.collection("messages").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            self.messages = documents.compactMap { (queryDocumentSnapshot) -> Message? in
+                let data = queryDocumentSnapshot.data()
+                
+                let uid = data["uid"] as? String ?? "нет данных"
+                let text = data["text"] as? String ?? "нет данных"
+                let displayname = data["displayName"] as? String ?? "нет данных"
+                let photoUrl = data["photoUrl"] as? String ?? "нет данных"
+                
+                return Message(
+                    id: UUID(),
+                    uid: uid,
+                    text: text,
+                    displayName: displayname,
+                    photoUrl: photoUrl
+                )
+            }
+        }
+    }
 }

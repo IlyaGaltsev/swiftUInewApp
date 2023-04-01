@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChatView: View {
+    @ObservedObject var messagesViewModel = MessagesViewModel()
     
     let layout = [GridItem(.adaptive(minimum: UIScreen.main.bounds.width ))]
     var body: some View {
@@ -16,7 +17,7 @@ struct ChatView: View {
            
                 
                 LazyVGrid(columns: layout, alignment: .leading) {
-                    ForEach(MessagesViewModel.shared.messages, id: \.uid) {item in
+                    ForEach(messagesViewModel.messages, id: \.id) {item in
                         MessageSelf(message: item)
                     }
                 }
