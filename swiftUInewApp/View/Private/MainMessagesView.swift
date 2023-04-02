@@ -2,44 +2,20 @@ import SwiftUI
 import AudioToolbox
 import Firebase
 import FirebaseFirestore
-
+import SDWebImageSwiftUI
 
 struct MainMessagesView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @State var sholdShowLogOutOptions = false
     
-    func getMessages() {
-        //        FirebaseFirestore.collection("messages").getDocuments {documentSnapshot, error in
-        //            if let error = error {
-        //                print("FATALITY,\(error)")
-        //            }
-        //
-        //            documentSnapshot?.documents.forEach({snapshot in
-        //                print(snapshot.data())
-        ////                        users.append(.init(data: snapshot.data()))
-        //            })
-        //        }
-        //        @FirestoreQuery(collectionPath: "messages") var todos
-        
-    }
-    
     private var navBar: some View {
         HStack(spacing: 16) {
             
-            
-            
-            AsyncImage(
-                url: viewModel.auth.currentUser?.photoURL,
-                
-                content: { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                }, placeholder: {
-                    Color.gray
-                })
-            .frame(width: 48, height: 48)
-            .mask(RoundedRectangle(cornerRadius: 48).frame(width: 48, height: 48))
+            WebImage(url: viewModel.auth.currentUser?.photoURL)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 48, height: 48)
+                .mask(RoundedRectangle(cornerRadius: 48).frame(width: 48, height: 48))
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(viewModel.auth.currentUser?.displayName ?? "This is you")
@@ -57,7 +33,6 @@ struct MainMessagesView: View {
             }
             Spacer()
             Button {
-                getMessages()
                 AudioServicesPlaySystemSound(1519)
                 self.sholdShowLogOutOptions.toggle()
             } label: {
@@ -78,8 +53,6 @@ struct MainMessagesView: View {
         NavigationView {
             VStack {
                 navBar
-                
-                
                
                 ScrollView {
                     ForEach(0..<20, id: \.self) { num in
